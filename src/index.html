@@ -2,12 +2,137 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MP1</title>
     </head>
     <body>
-        <h1>Hello World! Welcome to MP1!</h1>
-        <img src="assets/image.jpg">
+        <!-- Navigation bar -->
+        <nav class="nav" id="nav">
+        <div class="wrap nav-inner">
+            <a class="brand" href="#page-top">Jugos Pipelin</a>
+            <button class="nav-toggle" id="navToggle" type="button">Menu</button>
+            <ul class="nav-links" id="navLinks">
+            <li><a class="nav-link" href="#flavors">Flavors</a></li>
+            <li><a class="nav-link" href="#about">About</a></li>
+            <li><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        </nav>
+
+        <!-- Top -->
+        <header class="mainsection" id="page-top">
+        <div class="wrap">
+            <img src="assets/jugos.jpg" alt="juices">
+
+            <h1>Jugos Pipelin Fresh Juice</h1>
+
+            <div class="divider on-yellow">
+            <span class="rule"></span>
+            <img class=jp-logo src="assets/jp_logo.png" alt="jp-juices-logo">
+            <span class="rule"></span>
+            </div>
+
+            <p class="tagline">
+            <span>Quality</span><span class="dot">·</span><span>Flavor</span><span class="dot">·</span><span>Refreshing</span>
+            </p>
+        </div>
+        </header>
+
+        <main>
+        <!-- Sabores -->
+        <section class="section section--light" id="flavors">
+            <div class="wrap">
+            <h2>Flavors</h2>
+            <div class="divider on-light">
+                <span class="rule"></span>
+                <img class=jp-logo src="assets/jp_logo.png" alt="jp-juices-logo">
+                <span class="rule"></span>
+            </div>
+            <div class="grid" id="flavorsGrid"></div>
+            </div>
+        </section>
+
+        <!-- About us -->
+        <section class="section section--yellow" id="about">
+            <div class="wrap">
+            <h2>About</h2>
+            <div class="divider on-yellow">
+                <span class="rule"></span>
+                <img class=jp-logo src="assets/jp_logo.png" alt="jp-juices-logo">
+                <span class="rule"></span>
+            </div>
+            <div class="about-copy">
+                <p>We are passionate about creating fresh, delicious juices made from quality ingredients, bringing together vibrant flavors and natural goodness to make every sip a simple, refreshing part of your day.</p>
+                <p>We believe great juice starts with great ingredients, which is why we carefully blend fresh fruits and natural flavors to create refreshing, flavorful drinks that bring a little more goodness and joy to every day.</p>
+            </div>
+            <div class="center stack-cta">
+                <a class="btn btn--light" href="#contact">
+                Download
+                </a>
+            </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section section--light" id="contact">
+            <div class="wrap">
+            <h2>Contact Me</h2>
+            <div class="divider on-light">
+                <span class="rule"></span>
+                <span class="rule"></span>
+            </div>
+
+            <form class="form" id="contactForm" novalidate>
+                <div class="field" data-field>
+                <label for="c-name">Name</label>
+                <input id="c-name" name="name" type="text" autocomplete="name" placeholder="John Smith" required>
+                <span class="err" data-err></span>
+                </div>
+                <div class="field" data-field>
+                <label for="c-email">Email address</label>
+                <input id="c-email" name="email" type="email" autocomplete="email" placeholder="ada@example.com" required>
+                <span class="err" data-err></span>
+                </div>
+                <div class="field" data-field>
+                <label for="c-phone">Phone number</label>
+                <input id="c-phone" name="phone" type="tel" autocomplete="tel" placeholder="(123) 456-7890" required>
+                <span class="err" data-err></span>
+                </div>
+                <div class="field" data-field>
+                <label for="c-message">Message</label>
+                <textarea id="c-message" name="message" placeholder="blah blah" required></textarea>
+                <span class="err" data-err></span>
+                </div>
+                <div class="center">
+                <button class="btn btn--yellow" type="submit" id="sendBtn">Send</button>
+                </div>
+                <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+            </form>
+            </div>
+        </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+        <div class="wrap footer-cols">
+            <div>
+            <h3>Location</h3>
+            <p>3286 N Ashland<br>Chicago, IL 60613</p>
+            </div>
+            <div>
+            <h3>Around the Web</h3>
+            <ul class="socials">
+                <li><a href="#page-top" aria-label="Facebook">FB Logo</a></li>
+                <li><a href="#page-top" aria-label="Twitter">Twitter Logo </a></li>
+                <li><a href="#page-top" aria-label="LinkedIn">Linkedin logo</a></li>
+                <li><a href="#page-top" aria-label="TikTok">TikTok logo</a></li>
+            </ul>
+            </div>
+            <div>
+            <h3>About Jugos Pipelin</h3>
+            <p>Fresh, natural juices made with simple ingredients and a passion for great taste.<a href="#page-top">Jugos Pipelin</a>.</p>
+            </div>
+        </div>
+        </footer>
+        <div class="copyright">Copyright © Fel Balart 2026</div> 
     </body>
 </html>
