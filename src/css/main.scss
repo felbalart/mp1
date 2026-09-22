@@ -10,7 +10,7 @@
 
     --surface:#5b96de;
     --surface2: #f6f8f8;
-    --grayish:#61737f;
+    --grayish:#282828;
     --hairline: #d8e0e0;
 
     --on-dark: #ffffff;
@@ -310,6 +310,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     min-height: 300px;
+    padding: 30px;
   }
 
   /* ---------- about ---------- */
@@ -333,7 +334,6 @@
   max-width: 640px;
   margin-inline: auto;
   display: grid;
-  gap: 22px;
 }
 
 .field {
@@ -648,3 +648,76 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+#fruits_prize {
+  width: 500px;
+  height: 300px;
+}
+
+.modal {
+  width: 100%;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--blue-deep);
+  color: var(--surface);
+
+  &__inner {
+    display: grid;
+    place-content: center;
+    gap: 20px;
+    height: 100%;
+    padding: 40px;
+    text-align: center;
+  }
+
+  &__img {
+    max-width: min(600px, 80vw);
+    height: auto;
+    justify-self: center;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    border: 0;
+    background: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  &[open] {
+    animation: modal-in 2s ease-out;
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, .75);
+  }
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.prize-trigger {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+
+#video-container {
+  color: #fff;
+  text-align: center;
+  font-family: var(--font-body);
+  video {
+  max-height: 500px;
+  max-width: 500px;
+  }
+}
+

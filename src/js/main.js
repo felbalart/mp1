@@ -178,3 +178,21 @@ window.addEventListener('scroll', () => {
 
 window.addEventListener('resize', updateActiveLink);
 updateActiveLink();
+
+document.querySelectorAll('[data-modal-target]').forEach((trigger) => {
+  trigger.addEventListener('click', () => {
+    const dialog = document.getElementById(trigger.dataset.modalTarget);
+    if (dialog) dialog.showModal();
+  });
+});
+
+document.querySelectorAll('dialog.modal').forEach((dialog) => {
+  dialog.querySelectorAll('[data-modal-close]').forEach((btn) => {
+    btn.addEventListener('click', () => dialog.close());
+  });
+
+  // Clicking the backdrop closes; clicking the content does not.
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+});
