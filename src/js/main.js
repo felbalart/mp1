@@ -8,146 +8,147 @@ window.addEventListener("scroll", () => {
   }
 });
 
+/* ---------- carousel ---------- */
 
-(function () {
-  'use strict';
+const createCarousel = (root) => {
+  const track = root.querySelector('[data-track]');
+  const slides = Array.from(root.querySelectorAll('[data-slide]'));
+  const prevBtn = root.querySelector('[data-prev]');
+  const nextBtn = root.querySelector('[data-next]');
+  const dotsBox = root.querySelector('[data-dots]');
+  const live = root.querySelector('[data-live]');
 
-  function createCarousel(root) {
-    var track  = root.querySelector('[data-track]');
-    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-slide]'));
-    var prevBtn = root.querySelector('[data-prev]');
-    var nextBtn = root.querySelector('[data-next]');
-    var dotsBox = root.querySelector('[data-dots]');
-    var live    = root.querySelector('[data-live]');
+  if (!track || slides.length === 0) return;
 
-    if (!track || slides.length === 0) return;
+  const loop = root.dataset.loop !== 'false';
+  const delay = parseInt(root.dataset.autoplay, 10) || 0;
+  const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dots = [];
 
-    var loop  = root.dataset.loop !== 'false';
-    var delay = parseInt(root.dataset.autoplay, 10) || 0;
-    var index = 0;
-    var timer = null;
-    var dots  = [];
+  let index = 0;
+  let timer = null;
 
-    /* ---------- dots ---------- */
-    if (dotsBox) {
-      slides.forEach(function (_, i) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'carousel__dot';
-        dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        dot.addEventListener('click', function () {
-          goTo(i);
-          restart();
-        });
-        dotsBox.appendChild(dot);
-        dots.push(dot);
-      });
+  /* ---------- core ---------- */
+  const goTo = (target) => {
+    const last = slides.length - 1;
+    let wanted = target;
+
+    if (wanted < 0) wanted = loop ? last : 0;
+    if (wanted > last) wanted = loop ? 0 : last;
+
+    index = wanted;
+    track.style.transform = `translateX(${-100 * index}%)`;
+
+    slides.forEach((slide, i) => {
+      // Keep off-screen slides out of the tab order and the a11y tree.
+      slide.setAttribute('aria-hidden', String(i !== index));
+      slide.inert = i !== index;
+    });
+
+    dots.forEach((dot, i) => {
+      dot.setAttribute('aria-selected', String(i === index));
+      dot.tabIndex = i === index ? 0 : -1;
+    });
+
+    if (!loop) {
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === last;
     }
 
-    /* ---------- core ---------- */
-    function goTo(next) {
-      var last = slides.length - 1;
+    if (live) live.textContent = `Slide ${index + 1} of ${slides.length}`;
+  };
 
-      if (next < 0)    next = loop ? last : 0;
-      if (next > last) next = loop ? 0 : last;
+  const next = () => goTo(index + 1);
+  const prev = () => goTo(index - 1);
 
-      index = next;
-      track.style.transform = 'translateX(' + (-100 * index) + '%)';
+  /* ---------- autoplay ---------- */
+  const start = () => {
+    if (delay > 0 && motionOk && !timer) timer = setInterval(next, delay);
+  };
 
-      slides.forEach(function (slide, i) {
-        // Keep off-screen slides out of the tab order and the a11y tree.
-        slide.setAttribute('aria-hidden', String(i !== index));
-        slide.inert = i !== index;
-      });
+  const stop = () => {
+    clearInterval(timer);
+    timer = null;
+  };
 
-      dots.forEach(function (dot, i) {
-        dot.setAttribute('aria-selected', String(i === index));
-        dot.tabIndex = i === index ? 0 : -1;
-      });
-
-      if (!loop) {
-        if (prevBtn) prevBtn.disabled = index === 0;
-        if (nextBtn) nextBtn.disabled = index === last;
-      }
-
-      if (live) live.textContent = 'Slide ' + (index + 1) + ' of ' + slides.length;
-    }
-
-    var next = function () { goTo(index + 1); };
-    var prev = function () { goTo(index - 1); };
-
-    /* ---------- autoplay ---------- */
-    var motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function start() {
-      if (delay > 0 && motionOk && !timer) timer = setInterval(next, delay);
-    }
-    function stop() {
-      clearInterval(timer);
-      timer = null;
-    }
-    function restart() {
-      stop();
-      start();
-    }
-
-    /* ---------- events ---------- */
-    if (nextBtn) nextBtn.addEventListener('click', function () { next(); restart(); });
-    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); restart(); });
-
-    root.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); next(); restart(); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); restart(); }
-    });
-
-    root.addEventListener('mouseenter', stop);
-    root.addEventListener('mouseleave', start);
-    root.addEventListener('focusin', stop);
-    root.addEventListener('focusout', function (e) {
-      if (!root.contains(e.relatedTarget)) start();
-    });
-
-    document.addEventListener('visibilitychange', function () {
-      document.hidden ? stop() : start();
-    });
-
-    /* ---------- touch / swipe ---------- */
-    var startX = 0;
-    var dragging = false;
-
-    root.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      startX = e.clientX;
-      dragging = true;
-      stop();
-    });
-
-    root.addEventListener('pointerup', function (e) {
-      if (!dragging) return;
-      dragging = false;
-      var dx = e.clientX - startX;
-      if (Math.abs(dx) > 50) (dx < 0 ? next : prev)();
-      start();
-    });
-
-    root.addEventListener('pointercancel', function () {
-      dragging = false;
-      start();
-    });
-
-    goTo(0);
+  const restart = () => {
+    stop();
     start();
+  };
+
+  /* ---------- dots ---------- */
+  if (dotsBox) {
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'carousel__dot';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        goTo(i);
+        restart();
+      });
+      dotsBox.appendChild(dot);
+      dots.push(dot);
+    });
   }
 
-  document.querySelectorAll('[data-carousel]').forEach(createCarousel);
-})();
+  /* ---------- events ---------- */
+  if (nextBtn) nextBtn.addEventListener('click', () => { next(); restart(); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restart(); });
 
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); next(); restart(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); restart(); }
+  });
 
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', (e) => {
+    if (!root.contains(e.relatedTarget)) start();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
+
+  /* ---------- touch / swipe ---------- */
+  let startX = 0;
+  let dragging = false;
+
+  root.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    startX = e.clientX;
+    dragging = true;
+    stop();
+  });
+
+  root.addEventListener('pointerup', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 50) (dx < 0 ? next : prev)();
+    start();
+  });
+
+  root.addEventListener('pointercancel', () => {
+    dragging = false;
+    start();
+  });
+
+  goTo(0);
+  start();
+};
+
+document.querySelectorAll('[data-carousel]').forEach(createCarousel);
+
+/* ---------- reading-position indicator ---------- */
 
 const nav = document.getElementById('nav');
 const links = Array.from(document.querySelectorAll('.nav-link'));
-const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+const sections = links.map((a) => document.querySelector(a.getAttribute('href')));
 
 function updateActiveLink() {
   const navBottom = nav.getBoundingClientRect().bottom;
@@ -166,6 +167,7 @@ function updateActiveLink() {
 
   links.forEach((link, i) => link.classList.toggle('active', i === activeIndex));
 }
+
 let ticking = false;
 window.addEventListener('scroll', () => {
   if (ticking) return;
@@ -178,6 +180,8 @@ window.addEventListener('scroll', () => {
 
 window.addEventListener('resize', updateActiveLink);
 updateActiveLink();
+
+/* ---------- modals ---------- */
 
 document.querySelectorAll('[data-modal-target]').forEach((trigger) => {
   trigger.addEventListener('click', () => {
