@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>MP1</title>
     </head>
     <body>
@@ -41,18 +42,139 @@
         <!-- Sabores -->
         <section class="section section--light" id="flavors">
             <div class="wrap">
-            <h2>Flavors</h2>
-            <div class="divider on-light">
-                <span class="rule"></span>
-                <img class=jp-logo src="assets/jp_logo.png" alt="jp-juices-logo">
-                <span class="rule"></span>
+            <h2 id="flavors-title">Flavors</h2>
+            <div class="on-light">
+                
+        <section class="carousel" data-carousel data-autoplay="5000" aria-roledescription="carousel" aria-label="Featured destinations">
+
+        <div class="carousel__viewport">
+            <ul class="carousel__track" data-track>
+
+            <li class="carousel__slide" data-slide role="group" aria-roledescription="slide" aria-label="1 of 4">
+                <div class="carousel__media carousel__media--aurora"></div>
+                <div class="carousel__caption">
+                <p class="carousel__eyebrow">Red Apple</p>
+                <h2 class="carousel__title">Directly from south California</h2>
+                <p class="carousel__text">The apples are similar to Adan and Eva in paradise.</p>
+                </div>
+            </li>
+
+            <li class="carousel__slide" data-slide role="group" aria-roledescription="slide" aria-label="2 of 4">
+                <div class="carousel__media carousel__media--dunes"></div>
+                <div class="carousel__caption">
+                <p class="carousel__eyebrow">Peach</p>
+                <h2 class="carousel__title">Delicious just taken from the tree</h2>
+                <p class="carousel__text">Very fat sweet domestic delicuous peaches used to make juice.</p>
+                </div>
+            </li>
+
+            <li class="carousel__slide" data-slide role="group" aria-roledescription="slide" aria-label="3 of 4">
+                <div class="carousel__media carousel__media--reef"></div>
+                <div class="carousel__caption">
+                <p class="carousel__eyebrow">Mountain Liquid</p>
+                <h2 class="carousel__title">Delicious Mountain Drink</h2>
+                <p class="carousel__text">Very refreshing indeed.</p>
+                </div>
+            </li>
+
+            <li class="carousel__slide" data-slide role="group" aria-roledescription="slide" aria-label="4 of 4">
+                <div class="carousel__media carousel__media--peaks"></div>
+                <div class="carousel__caption">
+                <p class="carousel__eyebrow">Grapes and Plum</p>
+                <h2 class="carousel__title">This one is also very good!</h2>
+                <p class="carousel__text">Our purple favorite, done for kids, with all our love.</p>
+                </div>
+            </li>
+
+            </ul>
+        </div>
+
+        <button class="carousel__arrow carousel__arrow--prev" data-prev type="button" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <button class="carousel__arrow carousel__arrow--next" data-next type="button" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <div class="carousel__dots" data-dots role="tablist" aria-label="Choose slide"></div>
+
+        <p class="carousel__live" data-live aria-live="polite" aria-atomic="true"></p>
+        </section>
+
+
+
             </div>
             <div class="grid" id="flavorsGrid"></div>
+            <div class="grid" id="flavorsGrid">
+
+                <article class="card">
+                    <div class="card__media card__media--apple"></div>
+                    <div class="card__body">
+                    <h3 class="card__title">Red Apple</h3>
+                    <p class="card__text">Crisp Californian apples, pressed the day they're picked.</p>
+                    <button class="btn btn--yellow" type="button" data-modal-target="modal-apple">Details</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media card__media--peach"></div>
+                    <div class="card__body">
+                    <h3 class="card__title">Golden Peach</h3>
+                    <p class="card__text">Tree-ripened peaches with nothing added but cold.</p>
+                    <button class="btn btn--yellow" type="button" data-modal-target="modal-peach">Details</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media card__media--mint"></div>
+                    <div class="card__body">
+                    <h3 class="card__title">Mountain Mint</h3>
+                    <p class="card__text">Cucumber, lime and fresh mint. Our lightest pour.</p>
+                    <button class="btn btn--yellow" type="button" data-modal-target="modal-mint">Details</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media card__media--grape"></div>
+                    <div class="card__body">
+                    <h3 class="card__title">Grape &amp; Plum</h3>
+                    <p class="card__text">Deep purple, gently sweet. The one kids ask for.</p>
+                    <button class="btn btn--yellow" type="button" data-modal-target="modal-grape">Details</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media card__media--citrus"></div>
+                    <div class="card__body">
+                    <h3 class="card__title">Orange Ginger</h3>
+                    <p class="card__text">Valencia oranges with a sharp bite of root ginger.</p>
+                    <button class="btn btn--yellow" type="button" data-modal-target="modal-citrus">Details</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media card__media--berry"></div>
+                    <div class="card__body">
+                    <h3 class="card__title">Berry Blend</h3>
+                    <p class="card__text">Strawberry, raspberry and blackcurrant in one glass.</p>
+                    <button class="btn btn--yellow" type="button" data-modal-target="modal-berry">Details</button>
+                    </div>
+                </article>
+
+                </div>
+
             </div>
         </section>
 
         <!-- About us -->
-        <section class="section section--yellow" id="about">
+        <section class="section section--photo" id="about">
             <div class="wrap">
             <h2>About</h2>
             <div class="divider on-yellow">
