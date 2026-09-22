@@ -8,23 +8,14 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
             integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
             crossorigin="anonymous"
-            referrerpolicy="no-referrer" 
+            referrerpolicy="no-referrer" />
     </head>
-    <dialog class="modal" id="modal-prize" aria-labelledby="modal-prize-title">
-    <div class="modal__inner">
-        <button class="modal__close" type="button" data-modal-close aria-label="Close">&times;</button>
-        <h2 class="modal__title" id="modal-prize-title">Take part in our autumn promotion.</h2>
-        <h3>CALL NOW (800) JUICE-NOW (800) 123 45 67</p>
-        <p>Awarded by the Illinois Fresh Produce Association for our cold-pressed range.</p>
-    </div>
-    </dialog>
     <body>
         <!-- Navigation bar -->
         <nav class="nav" id="nav">
         <div class="wrap nav-inner">
             <a class="brand" href="#page-top">Jugos Pipelin</a>
-            <button class="nav-toggle" id="navToggle" type="button">Menu</button>
-            <ul class="nav-links" id="navLinks">
+            <ul class="nav-links">
             <li><a class="nav-link" href="#flavors">Flavors</a></li>
             <li><a class="nav-link" href="#about">About</a></li>
             <li><a class="nav-link" href="#contact">Contact</a></li>
@@ -43,7 +34,7 @@
 
             <div class="divider on-yellow">
             <span class="rule"></span>
-            <img class=jp-logo src="assets/jp_logo.png" alt="jp-juices-logo">
+            <img class="jp-logo" src="assets/jp_logo.png" alt="jp-juices-logo">
             <span class="rule"></span>
             </div>
 
@@ -59,9 +50,7 @@
         <section class="section section--light" id="flavors">
             <div class="wrap">
             <h2 id="flavors-title">Flavors</h2>
-            <div class="on-light">
-                
-        <section class="carousel" data-carousel data-autoplay="5000" aria-roledescription="carousel" aria-label="Featured destinations">
+        <section class="carousel" data-carousel data-autoplay="5000" aria-roledescription="carousel" aria-label="Featured juices">
 
         <div class="carousel__viewport">
             <ul class="carousel__track" data-track>
@@ -70,7 +59,7 @@
                 <div class="carousel__media carousel__media--aurora"></div>
                 <div class="carousel__caption">
                 <p class="carousel__eyebrow">Red Apple</p>
-                <h2 class="carousel__title">Directly from south California</h2>
+                <h3 class="carousel__title">Directly from south California</h3>
                 <p class="carousel__text">The apples are similar to Adan and Eva in paradise.</p>
                 </div>
             </li>
@@ -79,7 +68,7 @@
                 <div class="carousel__media carousel__media--dunes"></div>
                 <div class="carousel__caption">
                 <p class="carousel__eyebrow">Peach</p>
-                <h2 class="carousel__title">Delicious just taken from the tree</h2>
+                <h3 class="carousel__title">Delicious just taken from the tree</h3>
                 <p class="carousel__text">Very fat sweet domestic delicuous peaches used to make juice.</p>
                 </div>
             </li>
@@ -88,7 +77,7 @@
                 <div class="carousel__media carousel__media--reef"></div>
                 <div class="carousel__caption">
                 <p class="carousel__eyebrow">Mountain Liquid</p>
-                <h2 class="carousel__title">Delicious Mountain Drink</h2>
+                <h3 class="carousel__title">Delicious Mountain Drink</h3>
                 <p class="carousel__text">Very refreshing indeed.</p>
                 </div>
             </li>
@@ -97,7 +86,7 @@
                 <div class="carousel__media carousel__media--peaks"></div>
                 <div class="carousel__caption">
                 <p class="carousel__eyebrow">Grapes and Plum</p>
-                <h2 class="carousel__title">This one is also very good!</h2>
+                <h3 class="carousel__title">This one is also very good!</h3>
                 <p class="carousel__text">Our purple favorite, done for kids, with all our love.</p>
                 </div>
             </li>
@@ -125,8 +114,6 @@
         </section>
 
 
-
-            </div>
             <div class="grid" id="flavorsGrid">
 
                 <article class="card">
@@ -194,7 +181,7 @@
             <h2>About</h2>
             <div class="divider on-yellow">
                 <span class="rule"></span>
-                <img class=jp-logo src="assets/jp_logo.png" alt="jp-juices-logo">
+                <img class="jp-logo" src="assets/jp_logo.png" alt="jp-juices-logo">
                 <span class="rule"></span>
             </div>
             <div class="about-copy">
@@ -218,41 +205,36 @@
                 <span class="rule"></span>
             </div>
 
-            <form class="form" id="contactForm" novalidate>
-                <div class="field" data-field>
+            <form class="form" id="contactForm">
+                <div class="field">
                 <label for="c-name">Name</label>
                 <input id="c-name" name="name" type="text" autocomplete="name" placeholder="John Smith" required>
-                <span class="err" data-err></span>
                 </div>
-                <div class="field" data-field>
+                <div class="field">
                 <label for="c-email">Email address</label>
                 <input id="c-email" name="email" type="email" autocomplete="email" placeholder="ada@example.com" required>
-                <span class="err" data-err></span>
                 </div>
-                <div class="field" data-field>
+                <div class="field">
                 <label for="c-phone">Phone number</label>
                 <input id="c-phone" name="phone" type="tel" autocomplete="tel" placeholder="(123) 456-7890" required>
-                <span class="err" data-err></span>
                 </div>
-                <div class="field" data-field>
+                <div class="field">
                 <label for="c-message">Message</label>
                 <textarea id="c-message" name="message" placeholder="blah blah" required></textarea>
-                <span class="err" data-err></span>
                 </div>
                 <div class="center">
-                <button class="btn btn--yellow" type="submit" id="sendBtn">Send</button>
+                <button class="btn btn--yellow" type="submit">Send</button>
                 </div>
-                <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
             </form>
             </div>
         </section>
-        </main>
         <div id="video-container">
             <h2>Best fruit quality in the state</h2>
             <video controls>
                 <source src="assets/fruits_video.mp4" type="video/mp4" />
             </video>
         </div>
+        </main>
         <!-- Footer -->
         <footer class="footer">
         <div class="wrap footer-cols">
@@ -287,10 +269,18 @@
             </div>
             <div>
             <h3>About Jugos Pipelin</h3>
-            <p>Fresh, natural juices made with simple ingredients and a passion for great taste.<a href="#page-top">Jugos Pipelin</a>.</p>
+            <p>Fresh, natural juices made with simple ingredients and a passion for great taste. <a href="#page-top">Jugos Pipelin</a>.</p>
             </div>
         </div>
         </footer>
         <div class="copyright">Copyright © Fel Balart 2026</div> 
+        <dialog class="modal" id="modal-prize" aria-labelledby="modal-prize-title">
+        <div class="modal__inner">
+            <button class="modal__close" type="button" data-modal-close aria-label="Close">&times;</button>
+            <h2 class="modal__title" id="modal-prize-title">Take part in our autumn promotion.</h2>
+            <h3>CALL NOW (800) JUICE-NOW (800) 123 45 67</h3>
+            <p>Awarded by the Illinois Fresh Produce Association for our cold-pressed range.</p>
+        </div>
+        </dialog>
     </body>
 </html>
