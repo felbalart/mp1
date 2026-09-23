@@ -1,3 +1,9 @@
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   :root {
     /* Typography */
     --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -528,11 +534,6 @@
     flex: 0 0 100%;
     max-width: 100%;
 
-    /* The bottles have to live INSIDE the slide. .carousel__track sets
-       transform + will-change, so it opens a stacking context at level 0;
-       anything painted above the track (an ::after on .carousel) can never be
-       beaten by the caption no matter how high its z-index goes. Sitting in
-       the slide puts overlay and caption in one context, so z-index works. */
     &::before {
       content: "";
 
@@ -542,10 +543,6 @@
 
       pointer-events: none;
 
-      /* black_botls.png is 3:2 and fully opaque, but the slide is 16:9, so
-         `contain` letterboxes it with ~75px bare strips left and right.
-         The second layer fills those strips with the same black the image
-         already uses, so the darkening runs edge to edge. */
       background:
         url("../assets/black_botls.png") center / contain no-repeat,
         #000;
