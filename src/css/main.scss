@@ -470,7 +470,7 @@
 
   html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
 
-  .carousel {
+.carousel {
   position: relative;
   max-width: 960px;
   min-height: 500px;
@@ -478,65 +478,130 @@
   border-radius: 16px;
   background: var(--blue-deep);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-}
-.carousel__viewport {
-  overflow: hidden;
-  border-radius: 16px;
-}
-.carousel__track {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
-  will-change: transform;
-}
-@media (prefers-reduced-motion: reduce) {
-  .carousel__track {
-    transition: none;
+
+
+  &__viewport {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  &__track {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__slide {
+    position: relative;
+    flex: 0 0 100%;
+    max-width: 100%;
+
+    /* The bottles have to live INSIDE the slide. .carousel__track sets
+       transform + will-change, so it opens a stacking context at level 0;
+       anything painted above the track (an ::after on .carousel) can never be
+       beaten by the caption no matter how high its z-index goes. Sitting in
+       the slide puts overlay and caption in one context, so z-index works. */
+    &::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      pointer-events: none;
+
+      /* black_botls.png is 3:2 and fully opaque, but the slide is 16:9, so
+         `contain` letterboxes it with ~75px bare strips left and right.
+         The second layer fills those strips with the same black the image
+         already uses, so the darkening runs edge to edge. */
+      background:
+        url("../assets/black_botls.png") center / contain no-repeat,
+        #000;
+
+      opacity: 0.5;
+    }
+  }
+
+  &__media {
+    padding-top: 56.25%;
+    background-size: cover;
+    background-position: center;
+
+    @media (max-width: 640px) {
+      padding-top: 85%;
+    }
   }
 }
-.carousel__slide {
-  position: relative;
-  flex: 0 0 100%;
-  max-width: 100%;
-}
+
 .carousel__media {
   padding-top: 56.25%;
   background-size: cover;
   background-position: center;
-}
-@media (max-width: 640px) {
-  .carousel__media {
+
+  @media (max-width: 640px) {
     padding-top: 85%;
   }
+
+  &--aurora {
+    background-image: linear-gradient(
+      145deg,
+      #6E1F1F 0%,
+      #B83A3A 45%,
+      #E9A6A0 100%
+    );
+  }
+
+  &--dunes {
+    background-image: linear-gradient(
+      145deg,
+      #7A3A16 0%,
+      #D2813F 50%,
+      #F3CBA0 100%
+    );
+  }
+
+  &--reef {
+    background-image: linear-gradient(
+      145deg,
+      #1B4034 0%,
+      #3E8A68 45%,
+      #BFDDCB 100%
+    );
+  }
+
+  &--peaks {
+    background-image: linear-gradient(
+      145deg,
+      #3A2140 0%,
+      #6E4A82 50%,
+      #CDB6D6 100%
+    );
+  }
 }
-.carousel__media--aurora {
-  background-image: linear-gradient(145deg, #6E1F1F 0%, #B83A3A 45%, #E9A6A0 100%);
-}
-.carousel__media--dunes {
-  background-image: linear-gradient(145deg, #7A3A16 0%, #D2813F 50%, #F3CBA0 100%);
-}
-.carousel__media--reef {
-  background-image: linear-gradient(145deg, #1B4034 0%, #3E8A68 45%, #BFDDCB 100%);
-}
-.carousel__media--peaks {
-  background-image: linear-gradient(145deg, #3A2140 0%, #6E4A82 50%, #CDB6D6 100%);
-}
+
 .carousel__caption {
   position: absolute;
+  z-index: 2;
   inset-inline: 0;
-  bottom: 0;
+  bottom: 60%;
   padding: clamp(1rem, 4vw, 3rem);
   padding-inline: clamp(1.25rem, 6vw, 4.5rem);
   color: var(--on-dark);
-  background: linear-gradient(to top, rgba(18, 32, 25, 0.88), rgba(0, 0, 0, 0));
-}
-@media (max-width: 640px) {
-  .carousel__caption {
+  
+
+  @media (max-width: 640px) {
     padding-block: 1.25rem 3.25rem;
   }
 }
+
 .carousel__eyebrow {
   margin: 0 0 0.35rem;
   font-size: 0.75rem;
@@ -545,23 +610,23 @@
   text-transform: uppercase;
   color: var(--yellow);
 }
+
 .carousel__title {
   margin: 0 0 0.5rem;
   font-size: clamp(1.4rem, 3.4vw, 2.25rem);
   line-height: 1.15;
 }
+
 .carousel__text {
   margin: 0;
   max-width: 46ch;
   color: rgba(255, 249, 240, 0.78);
   font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-}
-@media (max-width: 640px) {
-  .carousel__text {
+
+  @media (max-width: 640px) {
     display: none;
   }
 }
-
 #flavors-title {
   font-size: 40px;
 }
