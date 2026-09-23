@@ -42,9 +42,21 @@
     }
 
     &__media {
+      position: relative;          /* anchor for the logo overlay */
       aspect-ratio: 4 / 3;
       background-size: cover;
       background-position: center;
+
+      /* JP mark on every card. A pseudo-element keeps it off background-image,
+         which each .card__media--<flavour> modifier already owns. */
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("../assets/jp_logo.png") center / 42% no-repeat;
+        opacity: 0.9;
+        filter: drop-shadow(0 2px 6px rgba(18, 32, 25, 0.35));
+      }
     }
 
     &__body {
@@ -280,6 +292,11 @@
   /* ---------- down section ---------- */
 .section {
 	 padding-block: 64px;
+
+   & .fruits-wrap {
+    padding: 80px;
+   }
+   
 	 &--light {
 		 background: var(--surface);
 		 color: var(--grayish);
@@ -289,9 +306,9 @@
 		 color: var(--blue);
 	}
 	 h2 {
-		 margin: 0;
+		 margin: 0 0 33px 0;
 		 text-align: center;
-		 font-size: 14px;
+		 font-size: 30px;
 		 font-weight: 800;
 		 text-transform: uppercase;
 	}
@@ -402,6 +419,7 @@
   background: var(--blue);
   color: var(--on-dark);
   padding-block: 44px;
+  margin-top: 100px;
 
   &-cols {
     display: grid;
@@ -418,6 +436,11 @@
     text-transform: uppercase;
   }
 }
+
+  #contact-send-btn-container {
+    margin-top: 30px;
+  }
+
   .socials {
     display: flex;
     justify-content: center;
@@ -425,15 +448,16 @@
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  .socials a {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--yellow);
-    color: var(--blue);
+
+    a {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--blue);
+    }
   }
 
   .copyright {
