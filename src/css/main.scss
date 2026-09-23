@@ -1,23 +1,28 @@
   :root {
-    --font-display: Arial, sans-serif;
-    --font-body:    "Helvetica Neue", Arial, sans-serif;
+    /* Typography */
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-body:    "Inter", "Helvetica Neue", Arial, sans-serif;
 
-    --yellow: #FFBF00;
-    --yellow-deep:#FFCE1B;
-    --yellow2: #DECA57;
-    --blue:#2c3e50;
-    --blue-deep:#1a252f;
+    /* Brand accent - amber */
+    --yellow:      #F2A11B;
+    --yellow-deep: #D4870E;
+    --yellow2:     #F6C46A;
 
-    --surface:#5b96de;
-    --surface2: #f6f8f8;
-    --grayish:#282828;
-    --hairline: #d8e0e0;
+    /* Ink - deep forest */
+    --blue:      #1B2D24;
+    --blue-deep: #122019;
 
-    --on-dark: #ffffff;
-    --field:       #ffffff;
-    --field-line:  #cbd6d3;
-    --danger:      #d9534f;
-    --shadow:      0 1px 2px #000, 0 8px 24px #000;
+    /* Surfaces */
+    --surface:  #FFF9F0;
+    --surface2: #FFFFFF;
+    --grayish:  #3A4A41;
+    --hairline: #E8EFE6;
+
+    --on-dark:     #FFF9F0;
+    --field:       #FFFFFF;
+    --field-line:  #D8E3DB;
+    --danger:      #C4553F;
+    --shadow:      0 1px 2px rgba(18, 32, 25, .12), 0 8px 24px rgba(18, 32, 25, .14);
     --channel: 16px;
     --nav-h: 56px;
     --measure: 500px;
@@ -65,12 +70,12 @@
   }
 
   $flavor-media: (
-    apple:  (#7f1d1d, #dc2626, #fca5a5),
-    peach:  (#7c2d12, #ea8c55, #fcd9a8),
-    mint:   (#064e3b, #10b981, #a7f3d0),
-    grape:  (#3b0764, #7e22ce, #e9d5ff),
-    citrus: (#7c2d12, #f97316, #fed7aa),
-    berry:  (#4c0519, #be123c, #fda4af),
+    apple:  (#6E1F1F, #B83A3A, #E9A6A0),
+    peach:  (#7A3A16, #D2813F, #F3CBA0),
+    mint:   (#1B4034, #3E8A68, #BFDDCB),
+    grape:  (#3A2140, #6E4A82, #CDB6D6),
+    citrus: (#7A3E10, #DB8A22, #F6D39B),
+    berry:  (#4A1226, #9C2F4C, #DFA8B4),
   );
 
   @each $name, $stops in $flavor-media {
@@ -114,7 +119,7 @@
 	}
 	 &--yellow {
 		 background: var(--yellow);
-		 color: #fff;
+		 color: var(--blue);
 		 &:hover {
 			 background: var(--yellow-deep);
 		}
@@ -251,7 +256,7 @@
     margin: 0;
     font-size: 12px;
     font-style: italic;
-    color: #fff
+    color: var(--blue)
   }
   .tagline span { white-space: nowrap; }
   .tagline .dot { font-style: normal; opacity: .6; padding-inline: 6px; }
@@ -293,7 +298,7 @@
   &--photo {
     color: #fff;
     background-image:
-      linear-gradient(rgba(26, 37, 47, .72), rgba(26, 37, 47, .72)),
+      linear-gradient(rgba(18, 32, 25, .8), rgba(18, 32, 25, .8)),
       url('../assets/juicy_fruits.jpg');
     background-attachment: fixed;
     background-position: center;
@@ -428,11 +433,12 @@
     height: 40px;
     border-radius: 50%;
     background: var(--yellow);
-    color: #fff;
+    color: var(--blue);
   }
 
   .copyright {
     background: var(--blue-deep);
+    color: var(--on-dark);
     text-align: center;
     font-size: .85rem;
     padding-block: 16px;
@@ -470,7 +476,7 @@
   min-height: 500px;
   margin-inline: auto;
   border-radius: 16px;
-  background: #161b22;
+  background: var(--blue-deep);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 .carousel__viewport {
@@ -506,16 +512,16 @@
   }
 }
 .carousel__media--aurora {
-  background-image: linear-gradient(145deg, #0f2027 0%, red 45%, #62f7c6 100%);
+  background-image: linear-gradient(145deg, #6E1F1F 0%, #B83A3A 45%, #E9A6A0 100%);
 }
 .carousel__media--dunes {
-  background-image: linear-gradient(145deg, #3a1c14 0%, #b4632b 50%, #f4c46b 100%);
+  background-image: linear-gradient(145deg, #7A3A16 0%, #D2813F 50%, #F3CBA0 100%);
 }
 .carousel__media--reef {
-  background-image: linear-gradient(145deg, #04202f 0%, #12657e 45%, #7ae0d0 100%);
+  background-image: linear-gradient(145deg, #1B4034 0%, #3E8A68 45%, #BFDDCB 100%);
 }
 .carousel__media--peaks {
-  background-image: linear-gradient(145deg, #2b2440 0%, #7d5a86 50%, #f3b9a3 100%);
+  background-image: linear-gradient(145deg, #3A2140 0%, #6E4A82 50%, #CDB6D6 100%);
 }
 .carousel__caption {
   position: absolute;
@@ -523,8 +529,8 @@
   bottom: 0;
   padding: clamp(1rem, 4vw, 3rem);
   padding-inline: clamp(1.25rem, 6vw, 4.5rem);
-  color: #f0f3f7;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0));
+  color: var(--on-dark);
+  background: linear-gradient(to top, rgba(18, 32, 25, 0.88), rgba(0, 0, 0, 0));
 }
 @media (max-width: 640px) {
   .carousel__caption {
@@ -537,7 +543,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #6ea8fe;
+  color: var(--yellow);
 }
 .carousel__title {
   margin: 0 0 0.5rem;
@@ -547,7 +553,7 @@
 .carousel__text {
   margin: 0;
   max-width: 46ch;
-  color: rgba(240, 243, 247, 0.72);
+  color: rgba(255, 249, 240, 0.78);
   font-size: clamp(0.9rem, 1.6vw, 1.05rem);
 }
 @media (max-width: 640px) {
@@ -573,14 +579,14 @@
   transform: translateY(-50%);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 50%;
-  background: rgba(13, 17, 23, 0.55);
-  color: #f0f3f7;
+  background: rgba(18, 32, 25, 0.6);
+  color: var(--on-dark);
   cursor: pointer;
   backdrop-filter: blur(6px);
   transition: background 180ms ease, transform 180ms ease, opacity 180ms ease;
 }
 .carousel__arrow:focus-visible {
-  outline: 2px solid #6ea8fe;
+  outline: 2px solid var(--yellow);
   outline-offset: 3px;
 }
 .carousel__arrow svg {
@@ -588,7 +594,7 @@
   height: 55%;
 }
 .carousel__arrow:hover {
-  background: rgba(13, 17, 23, 0.85);
+  background: rgba(18, 32, 25, 0.88);
 }
 .carousel__arrow:active {
   transform: translateY(-50%) scale(0.92);
@@ -625,18 +631,18 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 249, 240, 0.45);
   cursor: pointer;
   transition: background 180ms ease, width 180ms ease;
 }
 .carousel__dot:focus-visible {
-  outline: 2px solid #6ea8fe;
+  outline: 2px solid var(--yellow);
   outline-offset: 2px;
 }
 .carousel__dot[aria-selected=true] {
   width: 26px;
   border-radius: 5px;
-  background: #6ea8fe;
+  background: var(--yellow);
 }
 .carousel__live {
   position: absolute;
@@ -712,7 +718,7 @@
 
 
 #video-container {
-  color: #fff;
+  color: var(--blue);
   text-align: center;
   font-family: var(--font-body);
   margin-top: -100px;
